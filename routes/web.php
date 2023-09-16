@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [PagesController::class, 'storeRegister'])->name('register.store');
     
     Route::post('copy', [PagesController::class, 'copyFlash'])->name('copy.post');
-    //Route::get('search/guest', [SearchController::class, 'guestSearch'])->name('guest.search');
+    Route::get('search/guest', [SearchController::class, 'guestSearch'])->name('guest.search');
 });
 
 Route::middleware('auth')->group(function(){
@@ -39,6 +40,6 @@ Route::middleware('auth')->group(function(){
     Route::delete('logout', [PagesController::class, 'destroyLogin'])->name('login.destroy');
 
     Route::post('copyAuth', [RecipesController::class, 'copyFlashAuth'])->name('copy.auth');
-    //Route::get('search/user', [SearchController::class, 'userSearch'])->name('user.search');
+    Route::get('search/user', [SearchController::class, 'userSearch'])->name('user.search');
 });
 

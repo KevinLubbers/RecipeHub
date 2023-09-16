@@ -1,7 +1,7 @@
 
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Ingredient Name:</label>
-        <input type="text" class="form-control" id="ingredient_name" name="ingredient_name" value="{{$record->ingredient_name}}" style="width:50%;" required>
+        <input type="text" class="form-control" id="ingredient_name" name="ingredient_name" value="{{$record->ingredient_name}}" style="width:50%;" autofocus required>
         <div>
             <label for="quantityHundreds" class="form-label" style="display:flex;">Quantity: </label>
             <select id="quantityHundreds" name="quantityHundreds" style="border-radius:4px;border:2px #dee2e6 solid;">

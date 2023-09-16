@@ -41,8 +41,31 @@
                 @endauth
               </ul>
             </div>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" name="navSearch" id="navSearch" placeholder="Search" aria-label="Search">
+            @auth
+            <form class="d-flex" role="search" method="GET" action="{{route('user.search')}}">
+              <input class="form-control me-2" type="search" name="navSearch"
+              id="navSearch" placeholder="Search" aria-label="Search"
+              @if(request()->is('recipes') || request()->is('search/user'))
+               autofocus  
+              @endif
+              > 
+            @endauth
+            @guest
+            <form class="d-flex" role="search" method="GET" action="{{route('guest.search')}}">
+              <input class="form-control me-2" type="search" name="navSearch"
+              id="navSearch" placeholder="Search" aria-label="Search"
+              @if(request()->is('/') || request()->is('search/guest'))
+               autofocus  
+              @endif
+              > 
+            @endguest
+              @csrf
+              
+              
+              
+
+              
+              
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>

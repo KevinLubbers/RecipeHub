@@ -9,7 +9,7 @@
         <div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Recipe Name:</label>
-                <input type="text" class="form-control" id="title" name="recipe_title" value="{{$record->title}}" style="width:50%;" required>
+                <input type="text" class="form-control" id="title" name="recipe_title" value="{{$record->title}}" style="width:50%;" autofocus required>
               </div>
             <a href="{{route('recipes.index')}}"><button type="button" class="btn btn-outline-danger" name="submit">Back</button></a>
             <button type="submit" class="btn btn-outline-secondary" name="submit">Edit Recipe Name</button>
