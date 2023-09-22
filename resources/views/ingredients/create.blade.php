@@ -5,6 +5,7 @@
     <form method="POST" name="ingredientCreate" action="{{route('ingredients.store')}}">
         @csrf
         <h2>Create Ingredient</h2>
+        @include('flashmsgs.msgs')
         
         <div>
             @include('ingredients.createForm')

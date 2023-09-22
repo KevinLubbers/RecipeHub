@@ -28,7 +28,7 @@
               </button>
               <ul class="dropdown-menu">
                 @auth
-                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="{{route('profile.index')}}">Profile</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <form name="logoutForm" method="POST" action="{{route('login.destroy')}}">
                     @method('DELETE')
@@ -43,12 +43,21 @@
             </div>
             @auth
             <form class="d-flex" role="search" method="GET" action="{{route('user.search')}}">
+                  <label class="input-group-text" style="background-color:lightgray;border-radius:6px 0px 0px 6px;" for="inputGroupSelect01">Search:</label>
+                <select class="custom-select" style="padding:4px;background-color:lightgray;border-radius:0px 6px 6px 0px;border:none;" id="inputGroupSelect01">
+                  <option selected>public recipes</option>
+                  <option value="1">your recipes</option>
+                  <option value="2">users</option>
+                  <option value="3">your friends</option>
+                </select>
               <input class="form-control me-2" type="search" name="navSearch"
               id="navSearch" placeholder="Search" aria-label="Search"
               @if(request()->is('recipes') || request()->is('search/user'))
                autofocus  
               @endif
               > 
+              
+              
             @endauth
             @guest
             <form class="d-flex" role="search" method="GET" action="{{route('guest.search')}}">
@@ -60,12 +69,7 @@
               > 
             @endguest
               @csrf
-              
-              
-              
 
-              
-              
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>

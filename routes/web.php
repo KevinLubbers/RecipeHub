@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\InstructionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProfilesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,13 +35,20 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function(){
     Route::resource('recipes', RecipesController::class);
-
-    Route::resource('ingredients', IngredientsController::class);
-    Route::post('ingredients/{id}/create', [IngredientsController::class, 'create'])->name('create.ingred');
-
-    Route::delete('logout', [PagesController::class, 'destroyLogin'])->name('login.destroy');
-
     Route::post('copyAuth', [RecipesController::class, 'copyFlashAuth'])->name('copy.auth');
+    
+    Route::resource('ingredients', IngredientsController::class);
+    Route::get('ingredients/{id}/create', [IngredientsController::class, 'create'])->name('create.ingred');
+
+    Route::delete('logout', [PagesController::class, 'destroyLogin'])->name('login.destroy');   
+
     Route::get('search/user', [SearchController::class, 'userSearch'])->name('user.search');
+    
+    Route::get('profile', [ProfilesController::class, 'index'])->name('profile.index');
+    Route::delete('profile/delete', [ProfilesController::class, 'deleteAccount'])->name('profile.destroy');
+    Route::put('profile/update-email', [ProfilesController::class, 'updateEmail'])->name('profile.email');
+    Route::put('profile/update-username', [ProfilesController::class, 'updateUsername'])->name('profile.user');
+    Route::put('profile/update-password', [ProfilesController::class, 'updatePassword'])->name('profile.password');
+
 });
 

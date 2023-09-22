@@ -6,10 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Recipe;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class SearchController extends Controller
 {
     public function guestSearch(Request $request){
+       $validator = Validator::make($request->all(), [
+            'navSearch' => ['required', 'string', 'max:255'],
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        } 
         $search = $request->input('navSearch');
 		$search = explode(" ", $search);
 		$data = $this->generateOrder($search);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Recipe;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -39,10 +40,16 @@ class RecipesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'recipe_title' => 'required|max:255',
-
+        $validator = Validator::make($request->all(), [
+            'recipe_title' => ['required', 'max:255'],
         ]);
+    
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        } 
 
         $recipe = new Recipe;
         $recipe->user_id = Auth::id();
@@ -88,9 +95,17 @@ class RecipesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $this->validate($request,[
-            'recipe_title' => 'required|max:255'
+        
+        $validator = Validator::make($request->all(), [
+            'recipe_title' => ['required', 'max:255'],
         ]);
+    
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        } 
 
         $recipe = Recipe::find($id);
 

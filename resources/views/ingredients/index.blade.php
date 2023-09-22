@@ -1,8 +1,7 @@
-<form name="ingredientCreateRoute" method="POST" action="{{route('create.ingred', $record->id)}}">
-    @csrf
-    <button type="submit" class="btn btn-outline-primary" style="margin-bottom:20px;margin-top:8px;">Create New Ingredient</button>
+
     
-</form>
+    <a href="{{route('create.ingred', $record->id)}}"><button type="button" class="btn btn-outline-primary" style="margin-bottom:20px;margin-top:8px;">Create New Ingredient</button></a>
+    
 @include('flashmsgs.msgs')
     <table class="table table-striped">
         <tr>

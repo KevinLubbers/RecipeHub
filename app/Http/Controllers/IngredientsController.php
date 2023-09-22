@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Recipe;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class IngredientsController extends Controller
 {
@@ -32,9 +33,17 @@ class IngredientsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'ingredient_name' => 'required|string|max:255',
+       $validator = Validator::make($request->all(), [
+            'ingredient_name' => ['required', 'string', 'max:255'],
         ]);
+    
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        } 
+
 
         $ingredient = new Ingredient;
         $ingredient->recipe_id = $request->input('recipe_id');
@@ -77,9 +86,16 @@ class IngredientsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $this->validate($request, [
-            'ingredient_name' => 'required|string|max:255',
+       $validator = Validator::make($request->all(), [
+            'ingredient_name' => ['required', 'string', 'max:255'],
         ]);
+    
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        } 
 
         $ingredient = Ingredient::find($id);
         $ingredient->ingredient_name = $request->input('ingredient_name');

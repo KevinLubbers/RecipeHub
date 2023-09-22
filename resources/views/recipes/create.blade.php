@@ -5,6 +5,7 @@
     <form method="POST" name="recipeCreate" action="{{route('recipes.store')}}">
         @csrf
         <h2>Create New Recipe</h2>
+        @include('flashmsgs.msgs')
         <div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Enter Recipe:</label>

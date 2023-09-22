@@ -6,6 +6,7 @@
         @method('PUT')
         @csrf
         <h2>Edit Ingredient</h2>
+        @include('flashmsgs.msgs')
         
         <div>
             @include('ingredients.form')
